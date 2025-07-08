@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Asignación de Cursos</title>
+  <link rel="stylesheet" href="Estilos.css">
+</head>
+<body>
+  <h1>Asignación de Horarios</h1>
+
+  <form id="asignacion-form">
+    <label>Curso: <input type="text" id="curso" required></label><br>
+    <label>Día:
+      <select id="dia">
+        <option value="lunes">Lunes</option>
+        <option value="martes">Martes</option>
+        <option value="miercoles">Miércoles</option>
+        <option value="jueves">Jueves</option>
+        <option value="viernes">Viernes</option>
+      </select>
+    </label><br>
+    <label>Turno:
+      <select id="turno">
+        <option value="manana">Mañana</option>
+        <option value="tarde">Tarde</option>
+      </select>
+    </label><br>
+    <button type="submit">Asignar Curso</button>
+  </form>
+
+  <div id="resultado"></div>
+
+  <script>
+    const form = document.getElementById('asignacion-form');
+    const resultado = document.getElementById('resultado');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const curso = document.getElementById('curso').value.toLowerCase();
+      const dia = document.getElementById('dia').value;
+      const turno = document.getElementById('turno').value;
+
+      const res = await fetch('http://localhost:3000/asignar', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ curso, dia, turno })
+      });
+
+      const data = await res.text();
+      resultado.innerHTML = data;
+    });
+  </script>
+</body>
+</html>
