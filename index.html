@@ -9,7 +9,9 @@
   <h1>Asignación de Horarios</h1>
 
   <form id="asignacion-form">
-    <label>Curso: <input type="text" id="curso" required></label><br>
+    <label>Curso:
+      <select id="curso" required></select>
+    </label><br>
     <label>Día:
       <select id="dia">
         <option value="lunes">Lunes</option>
@@ -23,6 +25,7 @@
       <select id="turno">
         <option value="manana">Mañana</option>
         <option value="tarde">Tarde</option>
+        <option value="noche">Noche</option>
       </select>
     </label><br>
     <button type="submit">Asignar Curso</button>
@@ -33,14 +36,26 @@
   <script>
     const form = document.getElementById('asignacion-form');
     const resultado = document.getElementById('resultado');
+    const selectCurso = document.getElementById('curso');
+
+    fetch('/cursos')
+      .then(res => res.json())
+      .then(cursos => {
+        cursos.forEach(curso => {
+          const option = document.createElement('option');
+          option.value = curso;
+          option.textContent = curso;
+          selectCurso.appendChild(option);
+        });
+      });
 
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
-      const curso = document.getElementById('curso').value.toLowerCase();
+      const curso = selectCurso.value;
       const dia = document.getElementById('dia').value;
       const turno = document.getElementById('turno').value;
 
-      const res = await fetch('http://localhost:3000/asignar', {
+      const res = await fetch('/asignar', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ curso, dia, turno })

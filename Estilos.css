@@ -1,29 +1,54 @@
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f2f5f7;
+  margin: 0;
   padding: 20px;
-  background-color: #f8f9fa;
+  color: #333;
+}
+
+h1 {
+  text-align: center;
+  color: #2c3e50;
+  margin-bottom: 30px;
 }
 
 form {
+  max-width: 500px;
+  margin: auto;
   background-color: #ffffff;
-  padding: 15px;
-  border-radius: 10px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  max-width: 400px;
+  padding: 25px 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-label {
+form label {
   display: block;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+
+form select,
+form input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  margin-top: 5px;
+  font-size: 15px;
 }
 
 button {
+  display: block;
+  width: 100%;
+  padding: 12px;
   background-color: #3498db;
   color: white;
-  padding: 8px 12px;
+  font-size: 16px;
   border: none;
-  border-radius: 5px;
+  border-radius: 6px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 10px;
 }
 
 button:hover {
@@ -31,28 +56,53 @@ button:hover {
 }
 
 #resultado {
-  margin-top: 2rem;
-  background-color: #f4f4f4;
-  border: 1px solid #ccc;
-  padding: 1rem;
-  border-radius: 10px;
+  max-width: 600px;
+  margin: 30px auto;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-#resultado h2 {
+h2 {
+  margin-top: 20px;
   color: #2c3e50;
-  border-bottom: 1px solid #ccc;
-  padding-bottom: 5px;
 }
 
-#resultado ul {
-  list-style-type: none;
+ul {
+  list-style: none;
   padding-left: 0;
 }
 
-#resultado li {
-  background-color: #e8f0fe;
-  margin-bottom: 0.5rem;
-  padding: 0.5rem;
-  border-radius: 5px;
-  font-size: 16px;
+li {
+  padding: 8px 10px;
+  margin: 4px 0;
+  border-radius: 6px;
+  background-color: #ecf0f1;
+  font-weight: 500;
 }
+
+li::before {
+  content: "📌 ";
+  margin-right: 5px;
+  color: #7f8c8d;
+}
+
+li:has(span.check) {
+  background-color: #d1f7c4;
+}
+
+li:has(span.cross) {
+  background-color: #f8d7da;
+}
+
+span.check {
+  color: green;
+  font-weight: bold;
+}
+
+span.cross {
+  color: red;
+  font-weight: bold;
+}
+
